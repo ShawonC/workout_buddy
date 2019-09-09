@@ -10,4 +10,4 @@ abdominals = ['abdominals']
 wb = WorkoutBuddy(muscle='chest')
 
 exercises = wb.get_exercises()
-# print(exercises)
+print(exercises)

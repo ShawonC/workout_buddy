@@ -11,9 +11,9 @@ class WorkoutBuddy():
         self.cursor = self.database.cursor()
 
     def get_exercises(self):
-        sql_query = "SELECT exercise FROM exercises WHERE muscle=?"
-        self.cursor.execute(sql_query,(self.muscle,))
-        exercises = [row[0] for row in self.cursor]
+        base_query = "SELECT exercise FROM exercises WHERE muscle=?"
+        sql_query = self.cursor.execute(base_query,(self.muscle,))
+        exercises = [row[0] for row in sql_query]
         return exercises
 
     # def update_db(self):
