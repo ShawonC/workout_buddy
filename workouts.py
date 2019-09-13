@@ -7,7 +7,7 @@ arms = ['forearms', 'biceps', 'triceps']
 back = ['middle back', 'lats', 'lower back']
 abdominals = ['abdominals']
 
-wb = WorkoutBuddy(muscle='chest')
+wb = WorkoutBuddy(muscles=arms)
 
-exercises = wb.get_exercises()
-print(exercises)
+exercise = wb.choose_exercise()
+print(exercise)
