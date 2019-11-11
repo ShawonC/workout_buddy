@@ -52,3 +52,20 @@ class WorkoutBuddy():
         else:
             self.update_history(random_exercise)
             return random_exercise
+
+    def make_exercise_list(self, muscle_group: list):
+        group_length = len(muscle_group)
+        if group_length > 3:
+            data = random.sample(muscle_group, k=3)
+            exercises = [self.choose_exercise() for e in data]
+        elif group_length == 1:
+            count = 1
+            exercises = []
+            while count < 3:
+                exercises.append(self.choose_exercise())
+                count += 1
+        else:
+            exercises = [self.choose_exercise() for e in muscle_group]
+        return exercises
+
+
