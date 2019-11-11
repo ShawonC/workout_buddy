@@ -5,26 +5,26 @@ import random
 class WorkoutBuddy():
     def __init__(
         self,
-        muscles,
+        muscle,
         data='data/exercises'
     ):
-        self.muscles = muscles
+        self.muscle = muscle
         self.database = sqlite3.connect(data)
         self.cursor = self.database.cursor()
 
     def get_exercises(self):
         base_query = "SELECT exercise FROM exercises WHERE muscle IN (?)"
-        sql_query = self.cursor.execute(base_query,(self.muscles,))
+        sql_query = self.cursor.execute(base_query,(str(self.muscle),))
         exercises = [row[0] for row in sql_query]
         return exercises
 
     def update_history(self, exercise):
         self.cursor.execute('''INSERT INTO history(date, exercise, muscle)
-                               VALUES(?,?,?)''', (datetime.date.today(), exercise,))
+                               VALUES(?,?,?)''', (datetime.datetime.utcnow(), exercise, self.muscle,))
         self.database.commit()
 
     def check_table(self, exercise):
-        base_query = "SELECT exercise FROM exercises WHERE exercise=?"
+        base_query = "SELECT exercise FROM history WHERE exercise=?"
         sql_query = self.cursor.execute(base_query,(exercise,))
         exercise = [row[0] for row in sql_query]
         if exercise:
